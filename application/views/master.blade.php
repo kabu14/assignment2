@@ -9,5 +9,7 @@
 </head>
 <body>
 
+@yield('content_form')
+
 </body>
 </html>

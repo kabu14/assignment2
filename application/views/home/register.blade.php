@@ -10,11 +10,14 @@
 {{ Form::label('pass', 'Password')}}
 {{ Form::password('pass')}}
 <br>
-{{ Form::submit('Log in') }}
+{{ Form::label('confirm', 'Confirm Password')}}
+{{ Form::password('confirm')}}
+<br>
+{{ Form::submit('Register') }}
 {{ Form::close() }}
 
 <p>
-	{{HTML::link('View::make('home.register'), 'register')}}
+	or <a href=".">Log in</a>
 </p>
 
 
