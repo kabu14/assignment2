@@ -2,6 +2,6 @@
 
 @section('content_form')
 
-
+asasd
 
 @endsection
