@@ -1,13 +1,15 @@
 <?php
 
-// user Resource
-// Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
-// Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
-// Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
-// Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
-// Route::post('users', 'users@create');
-// Route::put('users/(:any)', 'users@update');
-// Route::delete('users/(:any)', 'users@destroy');
+//user Resource
+Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
+Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
+Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
+Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
+Route::post('users', 'users@create');
+Route::put('users/(:any)', 'users@update');
+Route::delete('users/(:any)', 'users@destroy');
+
+
 
 Route::controller(Controller::detect()); 
 

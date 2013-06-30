@@ -1,5 +1,3 @@
-<?php
-/*
 @layout('master')
 
 @section('content_form')

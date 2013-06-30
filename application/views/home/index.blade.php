@@ -1,5 +1,3 @@
-<?php
-/*
 @layout('master')
 
 @section('content_form')
@@ -8,9 +6,11 @@
 {{ Form::open('/') }}
 {{ Form::label('email', 'Email Address') }}
 {{ Form::text('email') }}
+{{ $errors->first('email', '<p class="error">:message</p>') }}
 <br>
 {{ Form::label('pass', 'Password')}}
 {{ Form::password('pass')}}
+{{ $errors->first('pass', '<p class="error">:message</p>') }}
 <br>
 {{ Form::submit('Log in') }}
 {{ Form::close() }}
@@ -21,5 +21,3 @@
 
 
 @endsection
-
-*/
