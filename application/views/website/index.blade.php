@@ -1,0 +1,1 @@
+This is the I:\wamp\www\as2\application\views/website/index.blade.php view

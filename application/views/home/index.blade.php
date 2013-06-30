@@ -1,9 +1,11 @@
+<?php
+/*
 @layout('master')
 
 @section('content_form')
 
 <h1>Log In</h1>
-{{ Form::open('verify.php') }}
+{{ Form::open('/') }}
 {{ Form::label('email', 'Email Address') }}
 {{ Form::text('email') }}
 <br>
@@ -14,8 +16,10 @@
 {{ Form::close() }}
 
 <p>
-	{{HTML::link('View::make('home.register'), 'register')}}
+	{{HTML::link('register', 'register')}}
 </p>
 
 
 @endsection
+
+*/
