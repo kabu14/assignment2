@@ -6,8 +6,8 @@ class Users_Controller extends Base_Controller {
 
 	public function get_index()
     {
-
-        return View::make('user.index');
+        //This is already overwritten in routes.php
+        //return View::make('user.index');
 
     }    
 
@@ -41,7 +41,8 @@ class Users_Controller extends Base_Controller {
         ));
 
         if ( $row ) {
-        return 'Success';
+        Auth::logout();
+        return 'Registration Successful! Please Go back to ' . HTML::link('/', 'login' ) . ' page';
         }
     }    
 

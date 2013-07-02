@@ -6,18 +6,21 @@ class Home_Controller extends Base_Controller {
 
 	public function get_index()
     {
-
+        Auth::logout();
         return View::make('home.index');
 
     }    
 
 	public function post_index()
     {
+        
+
         $credentials = array(
                         'username' => e(Input::get('email')),  // Input::get('email')
                         'password' => e(Input::get('pass')) // Input::get('password')
         );
      
+        $record = User::where_email($credentials['username'])->first();
         // Validation
         $v = User::validate(array(
                 'email' => $credentials['username'],
@@ -30,7 +33,7 @@ class Home_Controller extends Base_Controller {
             if ( Auth::attempt($credentials) )
             {
 
-                //Return a view for specific users
+                return Redirect::to('/users');
             }
             return Redirect::to('/')->with_errors($v->errors);
         }

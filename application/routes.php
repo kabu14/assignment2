@@ -2,7 +2,7 @@
 
 //user Resource
 // Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
-//Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
+// Route::get('users/(:any)', array('as' => 'users', 'uses' => 'users@show'));
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 // Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
 // Route::post('users', 'users@create');
@@ -11,11 +11,25 @@ Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 
 //jack@gmail.com, abc
 //When non users try to access user pages they will be denied.
-Route::get('users/(:any)', array('before' => 'auth', function() {
-     return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );
+Route::get('users', array('before' => 'auth', function() {
+     $user = Auth::user();
+	
+	if($user)
+	{
+			return View::make('user.index')->with('email', $user->email);
+	}
+
+	return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );
 }));
 
+
 Route::controller(Controller::detect()); 
+
+Route::get('logout', function(){
+	Auth::logout();
+	return 'logged out';
+	//Usually this redirect to a login form
+});
 
 /*
 |--------------------------------------------------------------------------

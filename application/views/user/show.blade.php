@@ -1,1 +1,4 @@
-This is the I:\wamp\www\as2\application\views/user/show.blade.php view
+@layout('master')
+@section('content_form')
+	{{ 'test' }}
+@endsection
