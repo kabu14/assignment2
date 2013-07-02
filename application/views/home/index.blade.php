@@ -16,7 +16,7 @@
 {{ Form::close() }}
 
 <p>
-	{{HTML::link('register', 'register')}}
+	{{HTML::link_to_route('new_user', 'register')}}
 </p>
 
 

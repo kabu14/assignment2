@@ -24,18 +24,19 @@ class Home_Controller extends Base_Controller {
                 'pass' => $credentials['password']
             ));
 
-        if ( $v !== true ) {
-        return Redirect::to('/')->with_errors($v->errors);
-        }
-
-        //Check Creds
-        if ( Auth::attempt($credentials) )
+        if ( $v ) 
         {
-            return 'You are a user! I will log you in';
+            //Check Creds
+            if ( Auth::attempt($credentials) )
+            {
+
+                //Return a view for specific users
+            }
+            return Redirect::to('/')->with_errors($v->errors);
         }
 
+        //TO DO - Show the error
         return Redirect::to('/');
-
     }    
 
     public function get_new()

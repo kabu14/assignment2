@@ -1,15 +1,19 @@
 <?php
 
 //user Resource
-Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
-Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
+// Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
+//Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
-Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
-Route::post('users', 'users@create');
-Route::put('users/(:any)', 'users@update');
-Route::delete('users/(:any)', 'users@destroy');
+// Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
+// Route::post('users', 'users@create');
+// Route::put('users/(:any)', 'users@update');
+// Route::delete('users/(:any)', 'users@destroy');
 
-
+//jack@gmail.com, abc
+//When non users try to access user pages they will be denied.
+Route::get('users/(:any)', array('before' => 'auth', function() {
+     return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );
+}));
 
 Route::controller(Controller::detect()); 
 
@@ -84,5 +88,5 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	// if (Auth::guest()) return Redirect::to('/');
 });

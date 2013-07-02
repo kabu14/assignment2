@@ -45,7 +45,7 @@ class Users_Controller extends Base_Controller {
         }
     }    
 
-	public function get_show($id, array('before' => 'auth', function() ))
+	public function get_show($id)
     {
         // Logic that checks if the person is that user
         // If person is not a user then redirect
