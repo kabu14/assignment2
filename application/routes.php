@@ -12,11 +12,25 @@ Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 //jack@gmail.com, abc
 //When non users try to access user pages they will be denied.
 Route::get('users', array('before' => 'auth', function() {
-     $user = Auth::user();
+    $user = Auth::user();
 	
 	if($user)
 	{
-			return View::make('user.index')->with('email', $user->email);
+		//To delete all websites
+		//User::find(3)->websites()->delete();
+		//return 'done deleting';
+		
+		//To insert a website in liquidalloy
+		// User::find(3)->websites()->insert(array(
+		// 	'url' => 'http://yahoo.ca'
+		// 	));
+		// return 'done inserting';
+
+		//To print the websites for a specific user
+		dd(User::find($user->id)->websites()->get());
+		// dd($user->id);
+		// return 'done finding';
+			//return View::make('user.index')->with('email', $user->email);
 	}
 
 	return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );

@@ -2,6 +2,15 @@
 
 class User extends Eloquent 
 {
+	public function images()
+	{
+		return $this->has_many('Image');
+	}
+
+	public function websites()
+	{
+		return $this->has_many('Website');
+	}
 
 	public static $rules = array(
 		'email' => 'required|email',
