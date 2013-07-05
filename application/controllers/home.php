@@ -32,8 +32,12 @@ class Home_Controller extends Base_Controller {
             //Check Creds
             if ( Auth::attempt($credentials) )
             {
-
-                return Redirect::to('/users');
+                $user = Auth::user();
+                if($user)
+                {
+                    $u_id = $user->id;
+                    return Redirect::to('/users/profile');
+                }
             }
             return Redirect::to('/')->with_errors($v->errors);
         }

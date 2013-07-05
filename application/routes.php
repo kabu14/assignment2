@@ -10,51 +10,9 @@ Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 // Route::delete('users/(:any)', 'users@destroy');
 
 //jack@gmail.com, abc
-//When non users try to access user pages they will be denied.
-Route::get('users', array('before' => 'auth', function() {
-    $user = Auth::user();
-	
-	if($user)
-	{
-		//To delete all websites
-		//User::find(3)->websites()->delete();
-		//return 'done deleting';
-		
-		//To insert a website in liquidalloy
-		// User::find(3)->websites()->insert(array(
-		// 	'url' => 'http://google.ca'
-		// 	));
-		// return 'done inserting';
-
-		//To print the websites for a specific user
-		// $user_id = User::find($user->id);
-		// $websites = Website::find($user_id);
-		// dd($websites);
-		// return 'done finding';
-		// return View::make('user.index')->with(array(
-		// 	'email' => $user->email,
-		// 	'websites' => $websites
-		// ));
-		
-		// If user is logging in from homepage then dont run insertion code below. 
-		// Database insertion
-gfdgfd
-		$u_id = $user->id;
-        $sites = Website::where('user_id', '=', $u_id)->get();
-
-        //Count the number of elements a user has stored
-        $num_sites = count($sites);
-        
-
-        return View::make('user.index')->with(array(
-                       'sites' => $sites,
-                       'email' => $user->email,
-                       'num_sites' => $num_sites
-       ));
-	}
-
-	return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );
-}));
+//When non users try to access user pages they will be denied through the user's controller.
+Route::get('/users/profile', array('before' => 'auth',
+            'uses' => 'users@profile'));
 
 
 Route::controller(Controller::detect()); 
@@ -136,5 +94,5 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	// if (Auth::guest()) return Redirect::to('/');
+	if (Auth::guest()) return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );
 });

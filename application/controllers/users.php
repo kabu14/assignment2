@@ -8,6 +8,7 @@ class Users_Controller extends Base_Controller {
     {
         //This is already overwritten in routes.php
         //return View::make('user.index');
+        return 'Users index';
 
     }    
 
@@ -46,13 +47,49 @@ class Users_Controller extends Base_Controller {
         }
     }    
 
-	public function get_show($id)
+	public function get_profile()
     {
-        // Logic that checks if the person is that user
-        // If person is not a user then redirect
-        return View::make('user.show');
+        // this controller only runs when the user is authenticated
+        // This is responsible for showing the user's information
+        $user = Auth::user(); // Set all user object information
+        
+        //update a user to put notes in
+        // $old_user = User::find(1);
+        // $old_user->note = 'This is where I keep my values.';
+        // $old_user->save();
+        // return 'done updating';
+        
+        //insert websites to work with
+        // User::find(1)->websites()->insert(array(
+        //      'url' => 'http://yahoo.ca'
+        //      ));
+        //     return 'done inserting';
 
-        // User is logged in. Now they can add photos, add notes..etc
+        if ($user) 
+        {
+            ## First query all the data 
+            
+            //user websites
+            $u_id = $user->id;
+            $websites = Website::where('user_id', '=', $u_id)->get(); //this gives an array of site objects
+            
+            // notes            
+            $specific_user = User::find($u_id); // returns just the object
+            $note = $specific_user->note;
+
+            //tbd
+            $tbd = $specific_user->tbd;
+            //images
+
+            ## return the view to show the data
+            return View::make('user.profile')->with(array(
+                'email' => $user->email,
+                'note' => $note,
+                'tbd' => $tbd,
+                'websites' => $websites
+            ));
+        }
+        
     }    
 
 	public function get_edit()
