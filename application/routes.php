@@ -22,15 +22,35 @@ Route::get('users', array('before' => 'auth', function() {
 		
 		//To insert a website in liquidalloy
 		// User::find(3)->websites()->insert(array(
-		// 	'url' => 'http://yahoo.ca'
+		// 	'url' => 'http://google.ca'
 		// 	));
 		// return 'done inserting';
 
 		//To print the websites for a specific user
-		dd(User::find($user->id)->websites()->get());
-		// dd($user->id);
+		// $user_id = User::find($user->id);
+		// $websites = Website::find($user_id);
+		// dd($websites);
 		// return 'done finding';
-			//return View::make('user.index')->with('email', $user->email);
+		// return View::make('user.index')->with(array(
+		// 	'email' => $user->email,
+		// 	'websites' => $websites
+		// ));
+		
+		// If user is logging in from homepage then dont run insertion code below. 
+		// Database insertion
+
+		$u_id = $user->id;
+        $sites = Website::where('user_id', '=', $u_id)->get();
+
+        //Count the number of elements a user has stored
+        $num_sites = count($sites);
+        
+
+        return View::make('user.index')->with(array(
+                       'sites' => $sites,
+                       'email' => $user->email,
+                       'num_sites' => $num_sites
+       ));
 	}
 
 	return 'You do not have permission to view this page. Log in first. ' . HTML::link('/', 'login' );

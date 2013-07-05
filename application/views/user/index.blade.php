@@ -19,12 +19,30 @@
 		<div id="column2">
 			<h2>Websites</h2>
 			<h3>click to open</h3>
-			{{ Form::text('websites') }}
-			{{ Form::text('websites') }}
-			{{ Form::text('websites') }}
-			{{ Form::text('websites') }}
-			{{ Form::text('websites') }}
-			{{ Form::text('websites') }}
+	
+			
+			<?php 
+				// Set the $website array elements to be a website based on the number of websites there are in the database. Otherwise set the remaining fields to empty.
+				$website = array(); 
+			?>
+			@for ($i = 0; $i < $num_sites; $i++)
+    			@if ( isset($sites[$i]->url) )
+					<?php $website[$i] = $sites[$i]->url; ?>
+    			@endif
+			@endfor
+			
+			@for ($i = $num_sites; $i < 7; $i++)
+    			<?php $website[$i] = ''; ?>
+			@endfor
+			
+			{{ Form::text('websites', $website[0]) }}
+			{{ Form::text('websites', $website[1]) }}
+			{{ Form::text('websites', $website[2]) }}
+			{{ Form::text('websites', $website[3]) }}
+			{{ Form::text('websites', $website[4]) }}
+			{{ Form::text('websites', $website[5]) }}
+
+			
 		</div><!--close column2-->
 
 	</div><!--close section1-->

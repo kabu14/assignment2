@@ -10,6 +10,7 @@
 <body>
 
 @yield('content_form')
-
+@yield('user_content')
+@yield('css')
 </body>
 </html>
