@@ -38,7 +38,7 @@ Route::get('users', array('before' => 'auth', function() {
 		
 		// If user is logging in from homepage then dont run insertion code below. 
 		// Database insertion
-
+gfdgfd
 		$u_id = $user->id;
         $sites = Website::where('user_id', '=', $u_id)->get();
 
