@@ -9,7 +9,7 @@
 
 		<div id="column1">
 			<h2>Notes</h2>
-			{{ Form::textarea('notes','notes',array('cols' => 16, 'rows' => 40)) }}
+			{{ Form::textarea('notes',$note,array('cols' => 16, 'rows' => 40)) }}
 		</div><!--close column1-->
 
 		<div id="column2">
@@ -28,7 +28,7 @@
 			@endfor
 			
 			@for ($i = $num_sites; $i < 7; $i++)
-    			<?php $site[$i] = ''; ?>
+    			<?php $site[$i] = ' '; ?>
 			@endfor
 			
 			{{ Form::text('websites0', $site[0]) }}
@@ -53,7 +53,7 @@
 
 		<div id="column4">
 			<h2>tbd</h2>
-			{{ Form::textarea('tbd','tbd',array('cols' => 16, 'rows' => 40)) }}
+			{{ Form::textarea('tbd',$tbd,array('cols' => 16, 'rows' => 40)) }}
 		</div>
 
 	</div>

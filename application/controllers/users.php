@@ -49,6 +49,10 @@ class Users_Controller extends Base_Controller {
 
 	public function get_profile()
     {
+
+
+            
+
         // this controller only runs when the user is authenticated
         // This is responsible for showing the user's information
         $user = Auth::user(); // Set all user object information
@@ -71,8 +75,9 @@ class Users_Controller extends Base_Controller {
             
             //user websites
             $u_id = $user->id;
+
             $websites = Website::where('user_id', '=', $u_id)->get(); //this gives an array of site objects
-            
+
             // notes            
             $specific_user = User::find($u_id); // returns just the object
             $note = $specific_user->note;
@@ -152,14 +157,72 @@ class Users_Controller extends Base_Controller {
         $old_user->save();
 
         // check if user has some websites saved
-        
+        $websites = Website::where('user_id', '=', $u_id)->get(); //this gives an array of site objects
+        if (empty($websites))
+        {
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites0'))
+                ));
+
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites1'))
+                ));
+
+            // User::find($u_id)->websites()->insert(array(
+            //         'url' =>    e(Input::get('websites2'))
+            //     ));
+
+            // User::find($u_id)->websites()->insert(array(
+            //         'url' =>    e(Input::get('websites3'))
+            //     ));
+
+            // User::find($u_id)->websites()->insert(array(
+            //         'url' =>    e(Input::get('websites4'))
+            //     ));
+
+            // User::find($u_id)->websites()->insert(array(
+            //         'url' =>    e(Input::get('websites5'))
+            //     ));
+
+        }
+        else
+        {
+            $old_url = Website::find($u_id)->get();
+            $old_url[0]->url = e(Input::get('website0'));
+            $old_url[1]->url = e(Input::get('website1'));
+            $old_url[0]->save();
+            $old_url[1]->save();
+        }
+
             // if user has websites update the table
 
 
         // create websites if user has never created any
 
         ## return to profile page
-        return View::make('user.profile');
+            
+        //runs the query again so after saving in edit the sites will show right away
+        $websites = Website::where('user_id', '=', $u_id)->get();
+            
+            // notes            
+            $specific_user = User::find($u_id); // returns just the object
+            $note = $specific_user->note;
+
+            //tbd
+            $tbd = $specific_user->tbd;
+            //images
+
+             ##Count the number of elements a user has stored to be used for generating default inputs
+            $num_sites = count($websites);
+
+            ## return the view to show the data
+            return View::make('user.profile')->with(array(
+                'email' => $user->email,
+                'note' => $note,
+                'tbd' => $tbd,
+                'websites' => $websites,
+
+            ));
         }
         
     }    
