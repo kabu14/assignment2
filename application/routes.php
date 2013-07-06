@@ -11,8 +11,8 @@ Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 
 //jack@gmail.com, abc
 //When non users try to access user pages they will be denied through the user's controller.
-Route::get('/users/profile', array('before' => 'auth',
-            'uses' => 'users@profile'));
+// Route::get('/users/profile', array('before' => 'auth',
+//             'uses' => 'users'));
 
 Route::get('/users/profile/edit', array('before' => 'auth',
             'uses' => 'users@edit'));

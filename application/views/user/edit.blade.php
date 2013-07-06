@@ -31,12 +31,12 @@
     			<?php $site[$i] = ''; ?>
 			@endfor
 			
-			{{ Form::text('websites', $site[0]) }}
-			{{ Form::text('websites', $site[1]) }}
-			{{ Form::text('websites', $site[2]) }}
-			{{ Form::text('websites', $site[3]) }}
-			{{ Form::text('websites', $site[4]) }}
-			{{ Form::text('websites', $site[5]) }}
+			{{ Form::text('websites0', $site[0]) }}
+			{{ Form::text('websites1', $site[1]) }}
+			{{ Form::text('websites2', $site[2]) }}
+			{{ Form::text('websites3', $site[3]) }}
+			{{ Form::text('websites4', $site[4]) }}
+			{{ Form::text('websites5', $site[5]) }}
 
 			
 		</div><!--close column2-->

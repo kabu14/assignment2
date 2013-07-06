@@ -134,12 +134,37 @@ class Users_Controller extends Base_Controller {
         return View::make('user.new');
     }    
 
-	public function put_update()
+	public function put_profile()
     {
-        return 'updated';
+        ## First get user information
+        $user = Auth::user(); // Set all user object information
+        
+        ## If a user is logged in
+        if ($user) {
+        // update the notes based on user input
+        $u_id = $user->id;
+        $old_user = User::find($u_id);
+        $old_user->note =  e(Input::get('notes'));
+        $old_user->save();
+
+        //update the tbd
+        $old_user->tbd =  e(Input::get('tbd'));
+        $old_user->save();
+
+        // check if user has some websites saved
+        
+            // if user has websites update the table
+
+
+        // create websites if user has never created any
+
+        ## return to profile page
+        return View::make('user.profile');
+        }
+        
     }    
 
-	public function delete_destroy()
+	public function delete_profile()
     {
 
     }
