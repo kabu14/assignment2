@@ -1,8 +1,6 @@
 @layout('master')
 
-@section('css')
-	<link media="screen" type="text/css" rel="stylesheet" href="css/notes.css">
-@endsection
+
 
 @section('user_content')
 

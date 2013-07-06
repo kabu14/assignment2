@@ -81,6 +81,9 @@ class Users_Controller extends Base_Controller {
             $tbd = $specific_user->tbd;
             //images
 
+             ##Count the number of elements a user has stored to be used for generating default inputs
+            $num_sites = count($websites);
+
             ## return the view to show the data
             return View::make('user.profile')->with(array(
                 'email' => $user->email,
@@ -94,7 +97,36 @@ class Users_Controller extends Base_Controller {
 
 	public function get_edit()
     {
+        $user = Auth::user(); // Set all user object information
+        if ($user) 
+        {
+            ## First query all the data 
+            
+            //user websites
+            $u_id = $user->id;
+            $websites = Website::where('user_id', '=', $u_id)->get(); //this gives an array of site objects
+            
+            // notes            
+            $specific_user = User::find($u_id); // returns just the object
+            $note = $specific_user->note;
 
+            //tbd
+            $tbd = $specific_user->tbd;
+            //images
+
+             ##Count the number of elements a user has stored to be used for generating default inputs
+            $num_sites = count($websites);
+
+            ## return the view to show the data
+            return View::make('user.edit')->with(array(
+                'email' => $user->email,
+                'note' => $note,
+                'tbd' => $tbd,
+                'websites' => $websites,
+                'num_sites' => $num_sites   
+            ));
+        }
+        
     }    
 
 	public function get_new()
@@ -104,7 +136,7 @@ class Users_Controller extends Base_Controller {
 
 	public function put_update()
     {
-
+        return 'updated';
     }    
 
 	public function delete_destroy()

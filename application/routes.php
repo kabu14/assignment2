@@ -14,6 +14,10 @@ Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('/users/profile', array('before' => 'auth',
             'uses' => 'users@profile'));
 
+Route::get('/users/profile/edit', array('before' => 'auth',
+            'uses' => 'users@edit'));
+
+
 
 Route::controller(Controller::detect()); 
 
