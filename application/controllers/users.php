@@ -168,30 +168,36 @@ class Users_Controller extends Base_Controller {
                     'url' =>    e(Input::get('websites1'))
                 ));
 
-            // User::find($u_id)->websites()->insert(array(
-            //         'url' =>    e(Input::get('websites2'))
-            //     ));
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites2'))
+                ));
 
-            // User::find($u_id)->websites()->insert(array(
-            //         'url' =>    e(Input::get('websites3'))
-            //     ));
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites3'))
+                ));
 
-            // User::find($u_id)->websites()->insert(array(
-            //         'url' =>    e(Input::get('websites4'))
-            //     ));
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites4'))
+                ));
 
-            // User::find($u_id)->websites()->insert(array(
-            //         'url' =>    e(Input::get('websites5'))
-            //     ));
+            User::find($u_id)->websites()->insert(array(
+                    'url' =>    e(Input::get('websites5'))
+                ));
 
         }
-        else
+        else   //update the websites table
         {
-            $old_url = Website::find($u_id)->get();
-            $old_url[0]->url = e(Input::get('website0'));
-            $old_url[1]->url = e(Input::get('website1'));
-            $old_url[0]->save();
-            $old_url[1]->save();
+            $user_websites = array(
+                array('url' => e(Input::get('websites0'))),
+                array('url' => e(Input::get('websites1'))),
+                array('url' => e(Input::get('websites2'))),
+                array('url' => e(Input::get('websites3'))),
+                array('url' => e(Input::get('websites4'))),
+                array('url' => e(Input::get('websites5')))
+            );
+
+            $site = User::find($u_id);
+            $site->websites()->save($user_websites);
         }
 
             // if user has websites update the table
