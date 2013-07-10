@@ -189,17 +189,43 @@ class Users_Controller extends Base_Controller {
         }
         else   //update the websites table
         {
-            $user_websites = array(
-                array('url' => e(Input::get('websites0'))),
-                array('url' => e(Input::get('websites1'))),
-                array('url' => e(Input::get('websites2'))),
-                array('url' => e(Input::get('websites3'))),
-                array('url' => e(Input::get('websites4'))),
-                array('url' => e(Input::get('websites5')))
+            
+            $web = array(
+                e(Input::get('websites0')),
+                e(Input::get('websites1')),
+                e(Input::get('websites2')),
+                e(Input::get('websites3')),
+                e(Input::get('websites4')),
+                e(Input::get('websites5')),
             );
+            // Look for the starting ID of the user's websites
+            $i = User::find($u_id)->websites()->first();
+            $i = $i->id;
+            // If a user tries to delete a website make the input as an empty string rather than a null
+            foreach ($web as $not_empty) {
+                if (empty($not_empty)) {
+                    $not_empty = ' ';
+                    DB::table('websites')
+                        ->where('user_id', '=', $u_id)
+                        ->where('id', '=', $i)
+                        ->update(array('url' => $not_empty));
+                    $i++;
+                }
+                else {
+                    DB::table('websites')
+                        ->where('user_id', '=', $u_id)
+                        ->where('id', '=', $i)
+                        ->update(array('url' => $not_empty));
+                    $i++;
+                }
+            }
 
-            $site = User::find($u_id);
-            $site->websites()->save($user_websites);
+            $count = $u_id + 6;
+            
+            $web_index = 0;
+            
+                
+            
         }
 
             // if user has websites update the table
