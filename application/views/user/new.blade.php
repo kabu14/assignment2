@@ -16,6 +16,10 @@
 {{ Form::password('confirm')}}
 {{ $errors->first('confirm', '<p class="error">:message</p>') }}
 <br>
+{{ Form::text('captchatest', '', array('class' => 'captchainput', 'placeholder' => 'Insert captcha...')) }}
+{{ Form::image(LaraCaptcha\Captcha::img(), 'captcha', array('class' => 'captchaimg')) }}
+{{ $errors->first('captchatest', '<p class="error">:message</p>') }}
+<br>
 {{ Form::submit('Register') }}
 {{ Form::close() }}
 

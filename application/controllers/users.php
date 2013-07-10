@@ -17,11 +17,13 @@ class Users_Controller extends Base_Controller {
         $email = e(Input::get('email'));
         $password = e(Input::get('pass'));
         $password_conf = e(Input::get('confirm'));
+        $captchat = e(Input::get('captchatest'));
         // Validate 
         $v = User::validate(array(
                 'email' => $email,
                 'pass' => $password,
-                'confirm' => $password_conf
+                'confirm' => $password_conf,
+                'captchatest' => $captchat
             ));
         if ( $v !== true ) {
         return Redirect::to('/users/new')->with_errors($v->errors);

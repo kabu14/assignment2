@@ -15,12 +15,17 @@ class User extends Eloquent
 	public static $rules = array(
 		'email' => 'required|email',
 		'pass' => 'required|min:3',
-		'confirm' => 'required|same:pass'
+		'confirm' => 'required|same:pass',
+		'captchatest' => 'laracaptcha|required'
+	);
+
+	public static $messages = array(
+		 'laracaptcha' => 'Invalid captcha'
 	);
 
 	public static function validate($input)
 	{
-		$v = Validator::make($input, static::$rules);
+		$v = Validator::make($input, static::$rules, static::$messages);
 		return $v->fails()
 			? $v
 			: true;
